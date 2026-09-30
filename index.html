@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Brian Blackwell</title><meta name="description" content="Here's my contact info">
+<link rel="icon" href="avatar.jpg">
+<style>
+:root{--bg:#0b0d12;--card:#151924;--card2:#1b2130;--line:#262d3d;--txt:#eef1f7;--mut:#9aa3b5;--acc:#d4af37}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:radial-gradient(1200px 600px at 50% -200px,#1d2436 0%,var(--bg) 60%) fixed,var(--bg);color:var(--txt);min-height:100vh;-webkit-font-smoothing:antialiased}
+.wrap{max-width:680px;margin:0 auto;padding:56px 20px 40px}
+header{text-align:center;margin-bottom:28px}
+.av{width:112px;height:112px;border-radius:50%;object-fit:cover;border:3px solid var(--acc);box-shadow:0 0 0 6px rgba(212,175,55,.12),0 12px 30px rgba(0,0,0,.5)}
+h1{font-size:2rem;letter-spacing:.06em;margin-top:18px;font-weight:800}
+.bio{color:var(--mut);margin-top:6px;letter-spacing:.14em;font-size:.82rem;text-transform:uppercase}
+.soc{display:flex;justify-content:center;gap:14px;margin-top:18px}
+.soc a{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--card);border:1px solid var(--line);color:var(--txt);transition:.2s}
+.soc a:hover{color:var(--acc);border-color:var(--acc);transform:translateY(-2px)}
+.links{display:flex;flex-direction:column;gap:12px}
+.link{display:flex;align-items:center;gap:14px;padding:12px 16px 12px 12px;background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:16px;color:var(--txt);text-decoration:none;font-weight:600;min-height:66px;transition:transform .15s,border-color .15s,box-shadow .15s}
+.link:hover{transform:translateY(-2px);border-color:var(--acc);box-shadow:0 10px 24px rgba(0,0,0,.35)}
+.link img,.link .ico{width:42px;height:42px;border-radius:10px;object-fit:contain;background:#fff;flex:none}
+.link .ico{display:grid;place-items:center;background:var(--acc);color:#111;font-size:22px}
+.lt{flex:1;text-align:center;font-size:.98rem;letter-spacing:.02em}
+.arr{color:var(--mut);font-size:1.6rem;line-height:1;width:20px;text-align:right}
+.link.cta{background:linear-gradient(135deg,#e2c15a,#b8912a);color:#15120a;border-color:transparent}
+.link.cta .arr{color:#3a2f0e} .link.cta .ico{background:#15120a;color:var(--acc)}
+h2{font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);margin:34px 0 14px;text-align:center}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.prod{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none;color:var(--txt);display:flex;flex-direction:column;transition:.15s}
+.prod:hover{border-color:var(--acc);transform:translateY(-2px)}
+.pimg{background:#fff;aspect-ratio:1/1;padding:14px;overflow:hidden}
+.pimg img{display:block;width:100%;height:100%;object-fit:contain}
+.prod .pt{font-size:.82rem;line-height:1.35;padding:10px 12px 4px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.prod .pp{margin-top:auto;padding:4px 12px 12px;font-size:.9rem} .pp b{color:var(--acc)} .pp s{color:var(--mut);font-size:.78rem;margin-left:4px}
+.tabs{display:flex;gap:4px;padding:4px;margin:0 auto 22px;max-width:320px;background:var(--card);border:1px solid var(--line);border-radius:999px}
+.tab{flex:1;appearance:none;border:0;background:transparent;color:var(--mut);font:inherit;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.82rem;padding:10px 0;border-radius:999px;cursor:pointer;transition:.2s}
+.tab:hover{color:var(--txt)} .tab[aria-selected="true"]{background:linear-gradient(135deg,#e2c15a,#b8912a);color:#15120a}
+.tab:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.panel[hidden]{display:none} .count{text-align:center;color:var(--mut);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+@media(min-width:620px){.grid{grid-template-columns:repeat(4,1fr)}}
+footer{text-align:center;color:#5d6578;font-size:.75rem;margin-top:36px}
+button.link{width:100%;font:inherit;font-weight:700;cursor:pointer;text-align:left}
+.modal{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(3,4,8,.72);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.modal[hidden]{display:none}
+.dlg{position:relative;width:100%;max-width:440px;max-height:calc(100vh - 32px);overflow:auto;background:linear-gradient(180deg,#1b2130,#131722);border:1px solid var(--line);border-top:3px solid var(--acc);border-radius:18px;padding:26px 22px 22px;box-shadow:0 24px 60px rgba(0,0,0,.6)}
+.dlg h3{font-size:1.15rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:18px;padding-right:36px}
+.dlg .sub{color:var(--mut);font-size:.85rem;margin-bottom:18px}
+.x{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--txt);font-size:20px;line-height:1;cursor:pointer}
+.x:hover{color:var(--acc);border-color:var(--acc)}
+.fld{margin-bottom:12px} .fld label{display:block;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:6px}
+.fld label .req{color:var(--acc)}
+.fld input,.fld textarea{width:100%;font:inherit;font-size:16px;color:var(--txt);background:#0e1119;border:1px solid var(--line);border-radius:10px;padding:11px 12px;outline:none;transition:border-color .15s}
+.fld textarea{min-height:96px;resize:vertical}
+.fld input:focus,.fld textarea:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(212,175,55,.18)}
+.fld.bad input{border-color:#e05d5d} .err{color:#ff8a8a;font-size:.78rem;margin-top:5px;min-height:0}
+.hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
+.send{width:100%;margin-top:6px;border:0;border-radius:12px;padding:14px;font:inherit;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#15120a;background:linear-gradient(135deg,#e2c15a,#b8912a);cursor:pointer}
+.send[disabled]{opacity:.7;cursor:wait}
+.status{margin-top:12px;font-size:.9rem;text-align:center;min-height:1.2em} .status.bad{color:#ff8a8a}
+.done{text-align:center;padding:26px 6px 10px} .done .ok{width:60px;height:60px;border-radius:50%;margin:0 auto 14px;display:grid;place-items:center;background:linear-gradient(135deg,#e2c15a,#b8912a);color:#15120a;font-size:30px;font-weight:900}
+.done p{font-size:1.1rem;font-weight:700}
+body.lock{overflow:hidden}
+</style></head><body><div class="wrap">
+<header><img class="av" src="avatar.jpg" alt="Brian Blackwell"><h1>BRIAN BLACKWELL</h1><p class="bio">Here&#39;s my contact info</p>
+<nav class="soc"><a href="tel:+18065026040" aria-label="Phone" title="Phone"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></a>
+<a href="mailto:BRIAN@GRANDSLAMEQUITY.COM" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></svg></a>
+<a href="https://instagram.com/bunit247" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 3.9 2.4 7.2 2.3c1.2-.1 1.6-.1 4.8-.1zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.2-9.6a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/></svg></a></nav></header>
+<div class="tabs" role="tablist" aria-label="Sections">
+<button class="tab" role="tab" id="tab-links" aria-controls="links" aria-selected="true">Links</button>
+<button class="tab" role="tab" id="tab-shop" aria-controls="shop" aria-selected="false" tabindex="-1">Shop</button></div>
+<main><section class="panel" id="links" role="tabpanel" aria-labelledby="tab-links"><div class="links">
+<button type="button" class="link cta" id="open-contact" aria-haspopup="dialog" aria-controls="contact-modal"><span class="ico">&#9993;</span><span class="lt">SEND ME YOUR CONTACT INFORMATION HERE</span><span class="arr">&rsaquo;</span></button>
+<a class="link" href="https://www.grandslamequity.com" target="_blank" rel="noopener"><img src="assets/414314971.png" alt=""><span class="lt">GRANDSLAM Website</span><span class="arr">&rsaquo;</span></a>
+<a class="link" href="https://www.amazon.com/shop/bunit247" target="_blank" rel="noopener"><img src="assets/601685202.webp" alt=""><span class="lt">BRIAN&#x27;S AMAZON Storefront</span><span class="arr">&rsaquo;</span></a>
+<a class="link" href="https://affiliates.americanpeptides.us/l/Hh9FQvIvG7/instagram" target="_blank" rel="noopener"><img src="assets/601264400.png" alt=""><span class="lt">AMERICAN PEPTIDES</span><span class="arr">&rsaquo;</span></a>
+<a class="link" href="https://grandslamrealtor.com" target="_blank" rel="noopener"><img src="assets/601080883.png" alt=""><span class="lt">GRANDSLAM WEST TEXAS REAL ESTATE</span><span class="arr">&rsaquo;</span></a>
+<a class="link" href="https://ezmoneyallday.com" target="_blank" rel="noopener"><img src="assets/601702852.jpeg" alt=""><span class="lt">EZ MONEY SPORTS CONSULTING</span><span class="arr">&rsaquo;</span></a>
+<a class="link" href="https://www.snapchat.com/add/BBlackwell_21" target="_blank" rel="noopener"><img src="assets/414314966.webp" alt=""><span class="lt">SNAPCHAT</span><span class="arr">&rsaquo;</span></a>
+<a class="link" href="https://www.instagram.com/bunit247" target="_blank" rel="noopener"><img src="assets/414314972.png" alt=""><span class="lt">INSTAGRAM</span><span class="arr">&rsaquo;</span></a>
+<a class="link" href="http://venmo.com/bunit247" target="_blank" rel="noopener"><img src="assets/414315364.png" alt=""><span class="lt">VENMO</span><span class="arr">&rsaquo;</span></a>
+<a class="link" href="https://cash.app/$UpNiN" target="_blank" rel="noopener"><img src="assets/414315135.png" alt=""><span class="lt">CASH APP</span><span class="arr">&rsaquo;</span></a>
+<a class="link" href="https://www.facebook.com/UPNIN?mibextid=LQQJ4d" target="_blank" rel="noopener"><img src="assets/414314970.png" alt=""><span class="lt">FACEBOOK</span><span class="arr">&rsaquo;</span></a>
+</div></section>
+<section class="panel" id="shop" role="tabpanel" aria-labelledby="tab-shop" hidden><p class="count">20 products</p><div class="grid">
+<a class="prod" href="https://amzn.to/4hVwlpN" target="_blank" rel="noopener" title="Deco Gear 49 Inch Curved Monitor, 5K2K Ultrawide WDQHD Screen 5120×1440, R1500, HDR400, 120Hz, 32:9 VA Panel, USB-C 65W PD, Adaptive Sync, PBP/PIP, KVM Switch, Built-in Speakers &amp; Ergonomic Stand"><div class="pimg"><img src="assets/p_aa1eaf5c-5716-4300-bf8a-95348fcb147c.jpg" alt=""></div><span class="pt">Deco Gear 49 Inch Curved Monitor, 5K2K Ultrawide WDQHD Screen 5120×1440, R1500, HDR400, 120Hz, 32:9 VA Panel, USB-C 65W PD, Adaptive Sync, PBP/PIP, KVM Switch, Built-in Speakers &amp; Ergonomic Stand</span><span class="pp"><b>$599.99</b></span></a>
+<a class="prod" href="https://www.aviatornation.com/?irclickid=TaxXH9TYWxyZUU7UY32FQRqeUkrwV5walVK9Wc0&amp;sharedid=&amp;irpid=3619307&amp;irgwc=1&amp;afsrc=1&amp;utm_source=LinkPrefer&amp;utm_medium=impact&amp;utm_campaign=22083&amp;utm_content=Online+Tracking+Link&amp;nb_platform=impact&amp;nb_adid=1845942&amp;nb_cid=22083&amp;nb_pid=3619307&amp;nb_aname=Online+Tracking+Link&amp;nb_atype=ONLINE_TRACKING_LINK&amp;nb_asize=&amp;nb_product_sku=&amp;nb_partner_name=LinkPrefer&amp;nb_mtype=mediapartner&amp;nb_partner_shared_id=&amp;gad_source=1&amp;gad_campaignid=24035782023&amp;gbraid=0AAAABD0WZ5RLrK1Z97pncU_0aHJdLruVP&amp;gclid=Cj0KCQjw5vLVBhCiARIsAD56SFK4NOS-3KpUGtsLTd_yNiVUW_8cfjTdcqNKJt4NFbYn3-ROb4v6SfcaAks2EALw_wcB" target="_blank" rel="noopener" title="Aviator Nation"><div class="pimg"><img src="assets/p_4a32caa4-708a-47a7-ad2d-69d30c14023b.webp" alt=""></div><span class="pt">Aviator Nation</span><span class="pp"><b>$189.00</b></span></a>
+<a class="prod" href="https://amzn.to/3U0Vuq3" target="_blank" rel="noopener" title="MARS MEN Testosterone Booster for Men - Natural Supplement Premium Tongkat Ali, Fenugreek, Shilajit &amp; Boron - Male Support - Libido, Energy &amp; Muscle Growth Support - 30 Servings"><div class="pimg"><img src="assets/p_b744263c-2e5f-4808-8a41-4776301e1be4.jpg" alt=""></div><span class="pt">MARS MEN Testosterone Booster for Men - Natural Supplement Premium Tongkat Ali, Fenugreek, Shilajit &amp; Boron - Male Support - Libido, Energy &amp; Muscle Growth Support - 30 Servings</span><span class="pp"><b>$99.00</b></span></a>
+<a class="prod" href="https://amzn.to/46YgPDt" target="_blank" rel="noopener" title="15.6&quot; Laptop, 1-Year Office 365, 4GB RAM 128GB Storage Expandable to 512GB | 5205U Processor,Win11,Numpad, Wi-Fi 5, Type-C, Portable Computer for Business &amp; Students"><div class="pimg"><img src="assets/p_a5e873b8-72b2-4270-bbc1-a833b6fdd51c.jpg" alt=""></div><span class="pt">15.6&quot; Laptop, 1-Year Office 365, 4GB RAM 128GB Storage Expandable to 512GB | 5205U Processor,Win11,Numpad, Wi-Fi 5, Type-C, Portable Computer for Business &amp; Students</span><span class="pp"><b>$379.99</b></span></a>
+<a class="prod" href="https://amzn.to/4jDh666" target="_blank" rel="noopener" title="TRILINK Phone Cooler with Rechargeable Battery, Phone Cooling Fan for Gaming Fit All Types of iPhone Android Smartphones, Mobile Phone Radiator with LED Temperature Display/Universal Clamp/RGB LEDs"><div class="pimg"><img src="assets/p_ee6915ff-a7b4-4451-a6ff-9fdbc59ab221.jpg" alt=""></div><span class="pt">TRILINK Phone Cooler with Rechargeable Battery, Phone Cooling Fan for Gaming Fit All Types of iPhone Android Smartphones, Mobile Phone Radiator with LED Temperature Display/Universal Clamp/RGB LEDs</span><span class="pp"><b>$35.99</b></span></a>
+<a class="prod" href="https://amzn.to/4rHVwj8" target="_blank" rel="noopener" title="Mollipop Feel-Good Lollipops Candy – Watermelon Flavor – Crafted with Yerba Mate, L- Theanine, Collagen Peptides &amp; Electrolytes – 25 Calories Each – Individually Wrapped Pops in Resealable Bag (20 Count)"><div class="pimg"><img src="assets/p_90b8bb89-64b3-4ba5-9b9d-16181bba115e.jpg" alt=""></div><span class="pt">Mollipop Feel-Good Lollipops Candy – Watermelon Flavor – Crafted with Yerba Mate, L- Theanine, Collagen Peptides &amp; Electrolytes – 25 Calories Each – Individually Wrapped Pops in Resealable Bag (20 Count)</span><span class="pp"><b>$24.00</b></span></a>
+<a class="prod" href="https://amzn.to/4yoQL0t" target="_blank" rel="noopener" title="HOIST Premium Electrolyte Hydration Drink, Rapid Rehydration Sports Drink, Ready-to-Drink Liquid Pouches, Clean Formula, No Artificial Sweeteners or Dyes, Fruit Punch, 8 fl oz (Pack of 24)"><div class="pimg"><img src="assets/p_ac9222bc-5929-44ef-9f63-525591f1df2f.jpg" alt=""></div><span class="pt">HOIST Premium Electrolyte Hydration Drink, Rapid Rehydration Sports Drink, Ready-to-Drink Liquid Pouches, Clean Formula, No Artificial Sweeteners or Dyes, Fruit Punch, 8 fl oz (Pack of 24)</span><span class="pp"><b>$44.99</b></span></a>
+<a class="prod" href="https://amzn.to/46PTfJ9" target="_blank" rel="noopener" title="SURITCH for iPhone 18 Pro Max/17 Pro Max Case, AirBounce Bumper, Black | Fit for MagSafe, Lens Cover, Built-in Kickstand, Camera Control Button Cover, No Screen Protector, Drop Shockproof Cases"><div class="pimg"><img src="assets/p_6f985282-a84b-4f08-8b0f-9fe327a8fd2d.jpg" alt=""></div><span class="pt">SURITCH for iPhone 18 Pro Max/17 Pro Max Case, AirBounce Bumper, Black | Fit for MagSafe, Lens Cover, Built-in Kickstand, Camera Control Button Cover, No Screen Protector, Drop Shockproof Cases</span><span class="pp"><b>$65.99</b></span></a>
+<a class="prod" href="https://amzn.to/4e6i1Zc" target="_blank" rel="noopener" title="WSKEN for iPhone 18 Pro Max Privacy Screen Protector - Colored Gradient | Anti Blue Light, Eye Protection, Auto-Dust Removal, Purple Gradient, Shatterproof Tempered Glass Screen Protector 18 Pro Max"><div class="pimg"><img src="assets/p_5b0b9034-1af5-422c-898b-5ffd7fd2dd45.jpg" alt=""></div><span class="pt">WSKEN for iPhone 18 Pro Max Privacy Screen Protector - Colored Gradient | Anti Blue Light, Eye Protection, Auto-Dust Removal, Purple Gradient, Shatterproof Tempered Glass Screen Protector 18 Pro Max</span><span class="pp"><b>$35.99</b></span></a>
+<a class="prod" href="https://amzn.to/4xZnRD9" target="_blank" rel="noopener" title="Travel Essentials 4in2 3XUSB C Multi Charging Cable for iWatch Charger, 5FT | Multi Charging Cable for iWatch Charger, USBC Car CarPlay Cable Compatible with iWatch Ultra/11-1/iPhone 17-15/Galaxy S25-22"><div class="pimg"><img src="assets/p_ae62da77-36c4-4766-9d30-a28a3b41d6e0.jpg" alt=""></div><span class="pt">Travel Essentials 4in2 3XUSB C Multi Charging Cable for iWatch Charger, 5FT | Multi Charging Cable for iWatch Charger, USBC Car CarPlay Cable Compatible with iWatch Ultra/11-1/iPhone 17-15/Galaxy S25-22</span><span class="pp"><b>$14.99</b></span></a>
+<a class="prod" href="https://amzn.to/4hnieJL" target="_blank" rel="noopener" title="LYAOAO for MagSafe Power Bank 10000mAh,Ultra-Slim Magnetic Portable Charger | 20W USB-C Power Delivery,LED Display,Travel Essential for Magsafe Battery Pack Compatible with iPhone 17-12 Series"><div class="pimg"><img src="assets/p_f36dfaa0-8751-4861-86eb-1c9e9d6aa878.jpg" alt=""></div><span class="pt">LYAOAO for MagSafe Power Bank 10000mAh,Ultra-Slim Magnetic Portable Charger | 20W USB-C Power Delivery,LED Display,Travel Essential for Magsafe Battery Pack Compatible with iPhone 17-12 Series</span><span class="pp"><b>$27.99</b></span></a>
+<a class="prod" href="https://amzn.to/4AHH7HC?linkCode=ml1&amp;tag=upnin-20" target="_blank" rel="noopener" title="Organic Natural Honey infused with Natural Jelly, Honey Bee Pollen &amp; 100% Mixed Natural Herbs (Large Pack of 24 Sachets 10Gram Each)"><div class="pimg"><img src="assets/p_9530665b-7cc8-44ed-b6eb-a7fff0012ef5.jpeg" alt=""></div><span class="pt">Organic Natural Honey infused with Natural Jelly, Honey Bee Pollen &amp; 100% Mixed Natural Herbs (Large Pack of 24 Sachets 10Gram Each)</span><span class="pp"><b>$49.99</b></span></a>
+<a class="prod" href="https://r.amzlink.to/?btn_url=https%3A%2F%2Fwww.amazon.com%2Fdp%2FB08F8LQ3MG%3Ftag%3Dlinktree02e-20%26linkCode%3Dogi%26th%3D1%26psc%3D1&amp;btn_ref=org-433bb393e1b8b503" target="_blank" rel="noopener" title="Zoom ZDM-1 Podcast Mic Pack for Podcasters with Dynamic Mic &amp; Headphones"><div class="pimg"><img src="assets/p_601707501.jpg" alt=""></div><span class="pt">Zoom ZDM-1 Podcast Mic Pack for Podcasters with Dynamic Mic &amp; Headphones</span><span class="pp"><b>$99.99</b></span></a>
+<a class="prod" href="https://r.amzlink.to/?btn_url=https%3A%2F%2Fwww.amazon.com%2Fdp%2FB07MQ191SH%3Ftag%3Dlinktree02e-20%26linkCode%3Dogi%26th%3D1%26psc%3D1&amp;btn_ref=org-433bb393e1b8b503" target="_blank" rel="noopener" title="Clever Fox Daily Planner, Undated Professional &amp; College Day, Lavender"><div class="pimg"><img src="assets/p_601707503.jpg" alt=""></div><span class="pt">Clever Fox Daily Planner, Undated Professional &amp; College Day, Lavender</span><span class="pp"><b>$25.99</b></span></a>
+<a class="prod" href="https://r.amzlink.to/?btn_url=https%3A%2F%2Fwww.amazon.com%2Fdp%2FB0CHPQCJSC&amp;btn_ref=org-433bb393e1b8b503" target="_blank" rel="noopener" title="LUME CUBE Content Kit 2.0 - Portable Selfie Phone Grip with Adjustable Tripod Stand, LED Light &amp; Built-in Audio Mic - Selfie Mobile Lighting Kit for Creators"><div class="pimg"><img src="assets/p_601707505.jpg" alt=""></div><span class="pt">LUME CUBE Content Kit 2.0 - Portable Selfie Phone Grip with Adjustable Tripod Stand, LED Light &amp; Built-in Audio Mic - Selfie Mobile Lighting Kit for Creators</span><span class="pp"><b>$69.99</b></span></a>
+<a class="prod" href="https://r.amzlink.to/?btn_url=https%3A%2F%2Fwww.amazon.com%2Fdp%2F1732189692%3Ftag%3Dlinktree02e-20%26linkCode%3Dogi%26th%3D1%26psc%3D1&amp;btn_ref=org-433bb393e1b8b503" target="_blank" rel="noopener" title="Full Focus Gray Linen Planner by Michael Hyatt - The #1 Daily Planner to Increase Focus, Eliminate Overwhelm, and Achieve Your Biggest Goals - Hardcover"><div class="pimg"><img src="assets/p_601707506.jpeg" alt=""></div><span class="pt">Full Focus Gray Linen Planner by Michael Hyatt - The #1 Daily Planner to Increase Focus, Eliminate Overwhelm, and Achieve Your Biggest Goals - Hardcover</span><span class="pp"><b>$52.99</b> <s>$59.99</s></span></a>
+<a class="prod" href="https://r.amzlink.to/?btn_url=https%3A%2F%2Fwww.amazon.com%2Fdp%2FB0FF3NT9YC%3Ftag%3Dlinktree02e-20%26linkCode%3Dogi%26th%3D1%26psc%3D1&amp;btn_ref=org-433bb393e1b8b503" target="_blank" rel="noopener" title="GROWTH ATLAS Business Brain Journal: 100-Day Guided Business Journal for Women &amp; Men – Leather Journal Notebook for Success Mindset &amp; Gratitude – Break Plateaus &amp; Achieve Growth"><div class="pimg"><img src="assets/p_601707507.jpg" alt=""></div><span class="pt">GROWTH ATLAS Business Brain Journal: 100-Day Guided Business Journal for Women &amp; Men – Leather Journal Notebook for Success Mindset &amp; Gratitude – Break Plateaus &amp; Achieve Growth</span><span class="pp"><b>$21.99</b> <s>$27.99</s></span></a>
+<a class="prod" href="https://r.amzlink.to/?btn_url=https%3A%2F%2Fwww.amazon.com%2Fdp%2F0593545397%3Ftag%3Dlinktree02e-20%26linkCode%3Dogi%26th%3D1%26psc%3D1&amp;btn_ref=org-433bb393e1b8b503" target="_blank" rel="noopener" title="The Time-Block Planner (Second Edition): A Daily Method for Deep Work in a Distracted World"><div class="pimg"><img src="assets/p_601707509.jpg" alt=""></div><span class="pt">The Time-Block Planner (Second Edition): A Daily Method for Deep Work in a Distracted World</span><span class="pp"><b>$15.76</b> <s>$30.00</s></span></a>
+<a class="prod" href="https://r.amzlink.to/?btn_url=https%3A%2F%2Fwww.amazon.com%2Fdp%2F1637746016&amp;btn_ref=org-433bb393e1b8b503" target="_blank" rel="noopener" title="The EOS Life Journal and Planner"><div class="pimg"><img src="assets/p_601707511.jpg" alt=""></div><span class="pt">The EOS Life Journal and Planner</span><span class="pp"><b>$25.76</b> <s>$29.95</s></span></a>
+<a class="prod" href="https://click.linksynergy.com/link?id=5lRxBRhs1h0&amp;offerid=1544209.4317612819524725897623055&amp;type=15&amp;murl=https%3A%2F%2Fwww.urbanoutfitters.com%2Fshop%2Fproductivity-planner-by-intelligent-change%3Fcolor%3D001%26size%3DALL%26type%3DSTANDARD%26utm_kxconfid%3Dv3sc2kde4&amp;u1=030c48d1-aec9-4514-9de2-61c32f4e185d" target="_blank" rel="noopener" title="Productivity Planner by Intelligent Change in Black at Urban Outfitters"><div class="pimg"><img src="assets/p_601707513.jpeg" alt=""></div><span class="pt">Productivity Planner by Intelligent Change in Black at Urban Outfitters</span><span class="pp"><b>$38.00</b></span></a>
+</div></section></main>
+<footer>&copy; Brian Blackwell</footer></div>
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  function show(name,push){
+    if(name!=='shop')name='links';
+    tabs.forEach(function(t){var on=t.getAttribute('aria-controls')===name;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=!on;});
+    if(push){var h=name==='shop'?'#shop':location.pathname+location.search;history.replaceState(null,'',h);}
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){show(t.getAttribute('aria-controls'),true);});
+    t.addEventListener('keydown',function(ev){if(ev.key==='ArrowRight'||ev.key==='ArrowLeft'){var n=tabs[(i+(ev.key==='ArrowRight'?1:tabs.length-1))%tabs.length];n.focus();n.click();}});
+  });
+  function fromHash(){show(location.hash.replace('#','').toLowerCase(),false);}
+  window.addEventListener('hashchange',fromHash);fromHash();
+})();
+</script>
+<div class="modal" id="contact-modal" hidden>
+<div class="dlg" role="dialog" aria-modal="true" aria-labelledby="cm-title">
+<button type="button" class="x" id="cm-close" aria-label="Close">&times;</button>
+<div id="cm-body">
+<h3 id="cm-title">Send me your contact info</h3>
+<form id="cm-form" novalidate>
+<div class="fld"><label for="cm-name">Name <span class="req">*</span></label><input id="cm-name" name="name" autocomplete="name" required><div class="err" id="cm-name-err"></div></div>
+<div class="fld"><label for="cm-email">Email <span class="req">*</span></label><input id="cm-email" name="email" type="email" autocomplete="email" required><div class="err" id="cm-email-err"></div></div>
+<div class="fld"><label for="cm-phone">Phone</label><input id="cm-phone" name="phone" type="tel" autocomplete="tel"></div>
+<div class="fld"><label for="cm-msg">Message</label><textarea id="cm-msg" name="message"></textarea></div>
+<div class="hp" aria-hidden="true"><label for="cm-honey">Leave this empty</label><input id="cm-honey" name="_honey" tabindex="-1" autocomplete="off"></div>
+<button type="submit" class="send" id="cm-send">Send</button>
+<p class="status" id="cm-status" role="status" aria-live="polite"></p>
+</form></div>
+<div class="done" id="cm-done" hidden><div class="ok">&#10003;</div><p>Thanks! Brian will be in touch.</p></div>
+</div></div>
+<script>
+(function(){
+  var ENDPOINT='https://formsubmit.co/ajax/brian@grandslamequity.com';
+  var m=document.getElementById('contact-modal'),f=document.getElementById('cm-form'),btn=document.getElementById('cm-send'),st=document.getElementById('cm-status'),opener=document.getElementById('open-contact'),last=null;
+  function open(){last=document.activeElement;m.hidden=false;document.body.classList.add('lock');setTimeout(function(){document.getElementById(document.getElementById('cm-done').hidden?'cm-name':'cm-close').focus();},0);}
+  function close(){m.hidden=true;document.body.classList.remove('lock');if(!document.getElementById('cm-done').hidden)reset();if(last)last.focus();}
+  function reset(){f.reset();document.getElementById('cm-body').hidden=false;document.getElementById('cm-done').hidden=true;st.textContent='';st.className='status';clearErr();}
+  function clearErr(){['name','email'].forEach(function(k){document.getElementById('cm-'+k+'-err').textContent='';document.getElementById('cm-'+k).parentNode.classList.remove('bad');});}
+  function bad(k,msg){document.getElementById('cm-'+k+'-err').textContent=msg;document.getElementById('cm-'+k).parentNode.classList.add('bad');}
+  opener.addEventListener('click',open);
+  document.getElementById('cm-close').addEventListener('click',close);
+  m.addEventListener('click',function(ev){if(ev.target===m)close();});
+  document.addEventListener('keydown',function(ev){if(ev.key==='Escape'&&!m.hidden)close();});
+  f.addEventListener('submit',function(ev){
+    ev.preventDefault();clearErr();st.textContent='';st.className='status';
+    var name=f.name.value.trim(),email=f.email.value.trim(),ok=true,first=null;
+    if(!name){bad('name','Please enter your name.');ok=false;first=first||'cm-name';}
+    if(!email){bad('email','Please enter your email.');ok=false;first=first||'cm-email';}
+    else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){bad('email','Please enter a valid email.');ok=false;first=first||'cm-email';}
+    if(!ok){document.getElementById(first).focus();return;}
+    var data={name:name,email:email,phone:f.phone.value.trim(),message:f.message.value.trim(),
+      _subject:'New contact from brianblackwelltx.com',_template:'table',_captcha:'false',_honey:f._honey.value};
+    btn.disabled=true;btn.textContent='Sending…';
+    fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
+      .then(function(r){return r.json().catch(function(){return {};}).then(function(j){if(!r.ok||j.success===false||j.success==='false')throw new Error(j.message||('HTTP '+r.status));return j;});})
+      .then(function(){document.getElementById('cm-body').hidden=true;document.getElementById('cm-done').hidden=false;document.getElementById('cm-close').focus();})
+      .catch(function(){st.textContent='Sorry, something went wrong sending your info. Please try again, or email BRIAN@GRANDSLAMEQUITY.COM.';st.className='status bad';})
+      .then(function(){btn.disabled=false;btn.textContent='Send';});
+  });
+})();
+</script></body></html>
