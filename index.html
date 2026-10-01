@@ -38,6 +38,7 @@ h2{font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)
 .panel[hidden]{display:none} .count{text-align:center;color:var(--mut);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
 @media(min-width:620px){.grid{grid-template-columns:repeat(4,1fr)}}
 footer{text-align:center;color:#5d6578;font-size:.75rem;margin-top:36px}
+.visits{margin-top:8px;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#6b7386} .visits[hidden]{display:none} .visits b{color:var(--acc-hi);font-weight:700;letter-spacing:.04em}
 button.link{width:100%;font:inherit;font-weight:700;cursor:pointer;text-align:left}
 .modal{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(3,4,8,.72);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
 .modal[hidden]{display:none}
@@ -77,7 +78,7 @@ body.lock{overflow:hidden}
 <a class="link" href="https://app.back9ins.com/apply/BrianBlackwell" target="_blank" rel="noopener"><img src="assets/grandslam-equity-mark.png" alt=""><span class="lt">LIFE INSURANCE QUOTE</span><span class="arr">&rsaquo;</span></a>
 <a class="link" href="https://grandslamrealtor.com" target="_blank" rel="noopener"><img src="assets/601080883.png" alt=""><span class="lt">GRANDSLAM WEST TEXAS REAL ESTATE</span><span class="arr">&rsaquo;</span></a>
 <a class="link" href="https://ezmoneyallday.com" target="_blank" rel="noopener"><img src="assets/601702852.jpeg" alt=""><span class="lt">EZ MONEY SPORTS CONSULTING</span><span class="arr">&rsaquo;</span></a>
-<a class="link" href="https://www.dca.world" target="_blank" rel="noopener"><img src="assets/dca-world.jpg" alt=""><span class="lt">DCA WORLD</span><span class="arr">&rsaquo;</span></a>
+<a class="link" href="https://www.dca.world" target="_blank" rel="noopener"><img src="assets/dca-world.jpg" alt=""><span class="lt">DCA WORLD HEALTH PRODUCTS</span><span class="arr">&rsaquo;</span></a>
 <a class="link" href="https://www.snapchat.com/add/BBlackwell_21" target="_blank" rel="noopener"><img src="assets/414314966.webp" alt=""><span class="lt">SNAPCHAT</span><span class="arr">&rsaquo;</span></a>
 <a class="link" href="https://www.instagram.com/bunit247" target="_blank" rel="noopener"><img src="assets/414314972.png" alt=""><span class="lt">INSTAGRAM</span><span class="arr">&rsaquo;</span></a>
 <a class="link" href="http://venmo.com/bunit247" target="_blank" rel="noopener"><img src="assets/414315364.png" alt=""><span class="lt">VENMO</span><span class="arr">&rsaquo;</span></a>
@@ -98,7 +99,22 @@ body.lock{overflow:hidden}
 <a class="prod" href="https://amzn.to/4hnieJL" target="_blank" rel="noopener" title="LYAOAO for MagSafe Power Bank 10000mAh,Ultra-Slim Magnetic Portable Charger | 20W USB-C Power Delivery,LED Display,Travel Essential for Magsafe Battery Pack Compatible with iPhone 17-12 Series"><div class="pimg"><img src="assets/p_f36dfaa0-8751-4861-86eb-1c9e9d6aa878.jpg" alt=""></div><span class="pt">LYAOAO for MagSafe Power Bank 10000mAh,Ultra-Slim Magnetic Portable Charger | 20W USB-C Power Delivery,LED Display,Travel Essential for Magsafe Battery Pack Compatible with iPhone 17-12 Series</span><span class="pp"><b>$27.99</b></span></a>
 <a class="prod" href="https://amzn.to/4AHH7HC?linkCode=ml1&amp;tag=upnin-20" target="_blank" rel="noopener" title="Organic Natural Honey infused with Natural Jelly, Honey Bee Pollen &amp; 100% Mixed Natural Herbs (Large Pack of 24 Sachets 10Gram Each)"><div class="pimg"><img src="assets/p_9530665b-7cc8-44ed-b6eb-a7fff0012ef5.jpeg" alt=""></div><span class="pt">Organic Natural Honey infused with Natural Jelly, Honey Bee Pollen &amp; 100% Mixed Natural Herbs (Large Pack of 24 Sachets 10Gram Each)</span><span class="pp"><b>$49.99</b></span></a>
 </div></section></main>
-<footer>&copy; Brian Blackwell</footer></div>
+<footer>&copy; Brian Blackwell<p class="visits" id="visits" hidden aria-live="polite">Visitors: <b id="visits-n"></b></p></footer></div>
+<script>
+(function(){
+  var API='https://abacus.jasoncameron.dev/',NS='brianblackwelltx.com',KEY='visits',FLAG='bbtx_visit_counted',BASE=5000;
+  var el=document.getElementById('visits'),n=document.getElementById('visits-n'),counted=false;
+  try{counted=sessionStorage.getItem(FLAG)==='1';}catch(e){}
+  var ctl=window.AbortController?new AbortController():null;var t=setTimeout(function(){if(ctl)ctl.abort();},6000);
+  fetch(API+(counted?'get/':'hit/')+encodeURIComponent(NS)+'/'+encodeURIComponent(KEY),ctl?{signal:ctl.signal}:{})
+    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+    .then(function(j){clearTimeout(t);var v=Number(j&&j.value);if(!isFinite(v)||v<0)throw new Error('bad value');
+      if(v<BASE)v+=BASE;
+      try{sessionStorage.setItem(FLAG,'1');}catch(e){}
+      n.textContent=Math.round(v).toLocaleString('en-US');el.hidden=false;})
+    .catch(function(){clearTimeout(t);el.hidden=true;});
+})();
+</script>
 <script>
 (function(){
   var tabs=[].slice.call(document.querySelectorAll('.tab'));
