@@ -1,0 +1,22 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Button taps · brianblackwelltx.com</title>
+<style>body{margin:0;background:#0b0d12;color:#eef0f4;font:15px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+.w{max-width:620px;margin:0 auto;padding:24px 16px}h1{font-size:1.2rem;letter-spacing:.08em;margin:0 0 4px}h1 b{color:#FF5257}
+.sub{color:#8a92a6;font-size:.85rem;margin-bottom:16px}table{width:100%;border-collapse:collapse}
+td,th{padding:10px 8px;border-bottom:1px solid #222836;text-align:left}th{color:#8a92a6;font-weight:600;font-size:.8rem;letter-spacing:.08em}
+td.n{text-align:right;font-weight:800;color:#FF5257;font-variant-numeric:tabular-nums}.bar{height:4px;background:#D5090E;border-radius:2px;margin-top:5px}
+.tot{margin-top:14px;color:#8a92a6;font-size:.85rem}button{background:#D5090E;color:#fff;border:0;border-radius:10px;padding:8px 14px;font-weight:700;cursor:pointer}</style></head>
+<body><div class="w"><h1>BUTTON <b>TAPS</b></h1><div class="sub">brianblackwelltx.com &middot; live counts from Abacus &middot; <span id="upd">loading…</span></div>
+<table><thead><tr><th>#</th><th>Button</th><th style="text-align:right">Taps</th></tr></thead><tbody id="rows"></tbody></table>
+<p class="tot" id="tot"></p><button id="rf" type="button">Refresh</button></div>
+<script>
+var KEYS=[["tap-save-my-contact", "SAVE MY CONTACT"], ["tap-share-your-contact-information-here", "Share Your Contact Information Here"], ["tap-grandslam-equity", "GRANDSLAM EQUITY"], ["tap-grandslam-texas-real-estate", "GRANDSLAM TEXAS REAL ESTATE"], ["tap-grandslam-life-insurance", "GRANDSLAM LIFE INSURANCE"], ["tap-ez-money-sports-consulting", "EZ MONEY SPORTS CONSULTING"], ["tap-dca-beef", "DCA BEEF"], ["tap-brian-s-amazon-storefront", "BRIAN'S AMAZON Storefront"], ["tap-american-peptides", "AMERICAN PEPTIDES"], ["tap-dca-health-products", "DCA HEALTH PRODUCTS"], ["tap-snapchat", "SNAPCHAT"], ["tap-instagram", "INSTAGRAM"], ["tap-venmo", "VENMO"], ["tap-cash-app", "CASH APP"], ["tap-facebook", "FACEBOOK"]],API='https://abacus.jasoncameron.dev/get/brianblackwelltx.com/';
+function esc(t){return t.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function load(){document.getElementById('upd').textContent='loading…';
+ Promise.all(KEYS.map(function(k){return fetch(API+encodeURIComponent(k[0]),{cache:'no-store'}).then(function(r){return r.ok?r.json():{value:0};}).then(function(j){return{t:k[1],n:Number(j.value)||0};}).catch(function(){return{t:k[1],n:0,err:1};});}))
+ .then(function(a){a.sort(function(x,y){return y.n-x.n;});var mx=Math.max(1,a[0]?a[0].n:1),tot=0,h='';
+  a.forEach(function(r,i){tot+=r.n;h+='<tr><td>'+(i+1)+'</td><td>'+esc(r.t)+'<div class="bar" style="width:'+(r.n/mx*100).toFixed(1)+'%"></div></td><td class="n">'+(r.err?'?':r.n.toLocaleString('en-US'))+'</td></tr>';});
+  document.getElementById('rows').innerHTML=h;document.getElementById('tot').textContent='Total taps: '+tot.toLocaleString('en-US')+' across '+a.length+' buttons';
+  document.getElementById('upd').textContent='updated '+new Date().toLocaleTimeString();});}
+document.getElementById('rf').onclick=load;load();
+</script></body></html>
