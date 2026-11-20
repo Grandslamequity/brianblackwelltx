@@ -15,7 +15,9 @@
 <meta name="twitter:description" content="Brian Blackwell, Founder of Grandslam Companies in Lubbock, Texas. Grandslam Equity, Apparel, Life Insurance, Texas Real Estate, DCA Beef, and more.">
 <meta name="twitter:image" content="https://brianblackwelltx.com/avatar-2026b.jpg">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Brian Blackwell","url":"https://brianblackwelltx.com/","image":"https://brianblackwelltx.com/avatar-2026b.jpg","jobTitle":"Founder","worksFor":{"@type":"Organization","name":"Grandslam Companies"},"sameAs":["https://www.grandslamequity.com/","https://www.grandslamapparel.shop/","https://grandslamlifequotes.com/","https://grandslamrealtor.com/","https://ezmoneyallday.com/","https://dcabeef.com/","https://www.dca.world/","https://www.snapchat.com/add/BBlackwell_21","https://www.instagram.com/bunit247","https://www.facebook.com/UPNIN"]}</script>
-<link rel="icon" href="avatar-2026b.jpg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" href="/favicon.ico">
 <style>
 :root{--bg:#0b0d12;--card:#151924;--card2:#1b2130;--line:#262d3d;--txt:#eef1f7;--mut:#9aa3b5;--acc:#D5090E;--acc-dk:#A3070B;--acc-hi:#FF5257}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -109,7 +111,7 @@ body.lock{overflow:hidden}
 <a class="link" data-k="tap-facebook" href="https://www.facebook.com/UPNIN?mibextid=LQQJ4d" target="_blank" rel="noopener"><img src="assets/414314970.png" alt=""><span class="lt">FACEBOOK</span><span class="arr">&rsaquo;</span></a>
 </div></section>
 </main>
-<footer>&copy; Brian Blackwell<p class="visits" id="visits" hidden aria-live="polite">Visitors: <b id="visits-n"></b></p></footer>
+<footer>&copy; Brian Blackwell<p class="visits" id="visits" aria-live="polite">Visitors: <b id="visits-n">6,434</b></p></footer>
 <section class="share" aria-labelledby="share-h"><h2 id="share-h">SHARE <span>MY</span> PAGE</h2>
 <button type="button" id="share-qr" aria-label="Share brianblackwelltx.com"><img src="assets/share-qr.png" width="200" height="200" alt="QR code for brianblackwelltx.com" loading="lazy"></button>
 <p class="cap" id="share-cap">Scan or tap to share &middot; brianblackwelltx.com</p></section></div>
@@ -131,17 +133,28 @@ body.lock{overflow:hidden}
 </script>
 <script>
 (function(){
-  var API='https://abacus.jasoncameron.dev/',NS='brianblackwelltx.com',KEY='visits',FLAG='bbtx_visit_counted',BASE=5000;
-  var el=document.getElementById('visits'),n=document.getElementById('visits-n'),counted=false;
+  var API='https://abacus.jasoncameron.dev/',NS='brianblackwelltx.com',KEY='visits',FLAG='bbtx_visit_counted',CACHE='bbtx_visits_last',BASE=5000,FALLBACK=6434,TIMEOUT=10000;
+  var n=document.getElementById('visits-n'),counted=false,cached=null;
   try{counted=sessionStorage.getItem(FLAG)==='1';}catch(e){}
-  var ctl=window.AbortController?new AbortController():null;var t=setTimeout(function(){if(ctl)ctl.abort();},6000);
-  fetch(API+(counted?'get/':'hit/')+encodeURIComponent(NS)+'/'+encodeURIComponent(KEY),ctl?{signal:ctl.signal}:{})
-    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
-    .then(function(j){clearTimeout(t);var v=Number(j&&j.value);if(!isFinite(v)||v<0)throw new Error('bad value');
-      if(v<BASE)v+=BASE;
-      try{sessionStorage.setItem(FLAG,'1');}catch(e){}
-      n.textContent=Math.round(v).toLocaleString('en-US');el.hidden=false;})
-    .catch(function(){clearTimeout(t);el.hidden=true;});
+  try{cached=localStorage.getItem(CACHE);}catch(e){}
+  var shown=parseInt(cached,10);
+  if(!isFinite(shown)||shown<0)shown=FALLBACK;
+  n.textContent=Math.round(shown).toLocaleString('en-US');
+  function show(v){
+    if(v<BASE)v+=BASE;
+    try{sessionStorage.setItem(FLAG,'1');}catch(e){}
+    try{localStorage.setItem(CACHE,String(Math.round(v)));}catch(e){}
+    n.textContent=Math.round(v).toLocaleString('en-US');
+  }
+  function load(kind){
+    var ctl=window.AbortController?new AbortController():null;
+    var t=setTimeout(function(){if(ctl)ctl.abort();},TIMEOUT);
+    return fetch(API+kind+encodeURIComponent(NS)+'/'+encodeURIComponent(KEY),ctl?{signal:ctl.signal}:{})
+      .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+      .then(function(j){clearTimeout(t);var v=Number(j&&j.value);if(!isFinite(v)||v<0)throw new Error('bad value');show(v);})
+      .catch(function(){clearTimeout(t);return Promise.reject();});
+  }
+  load(counted?'get/':'hit/').catch(function(){return load('get/');}).catch(function(){});
 })();
 </script>
 
